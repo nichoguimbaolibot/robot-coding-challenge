@@ -13,8 +13,8 @@ const Robot: React.FunctionComponent<IRobotProps> = ({
       style.display = 'none';
       return;
     }
-    const xAxisCalculation = xAxisPlacement * 96 + 470;
-    const yAxisCalculation = -yAxisPlacement * 105 + 430;
+    const xAxisCalculation = xAxisPlacement * 96 + 49;
+    const yAxisCalculation = -yAxisPlacement * 103 + 420;
 
     const robotMovementCoordinates = `translate(${xAxisCalculation}px,${yAxisCalculation}px) rotate(${robotDirection}deg)`;
 
