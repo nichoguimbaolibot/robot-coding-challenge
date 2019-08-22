@@ -1,15 +1,14 @@
 .table-box-section {
   display: table;
   position: absolute;
-
+  width: 100%;
   .table-item {
     display: flex;
+    justify-content: center;
   }
 
   .coordinate-section.-inline {
-    margin-left: 35px;
     display: flex;
-    justify-content: space-between;
   }
 
   .coordinate-section.coordinate-section.-block {
@@ -23,7 +22,6 @@
     display: inline-block;
     width: 100px;
     text-align: center;
-    margin-right: 18px;
   }
 
   .coordinate-section.-block .coordinate-label {
@@ -32,6 +30,5 @@
     justify-content: center;
     margin: 10px;
     width: 5px;
-    height: 100px;
   }
 }

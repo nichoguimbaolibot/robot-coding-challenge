@@ -14,7 +14,7 @@ const Coordinates: React.FunctionComponent<ICoordinates> = ({
     <section className={coordinatesClassName}>
       {Array(rowBoxes)
         .fill(Math.random())
-        .map((box: number, index: number) => (
+        .map((item: number, index: number) => (
           <span className="coordinate-label" key={index}>
             {index}
           </span>

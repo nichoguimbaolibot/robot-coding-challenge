@@ -5,14 +5,16 @@ interface IControllerProps {
   onChangeMovementToLeft: () => void;
   onChangeMovementToRight: () => void;
   onChangeRobotMovement: () => void;
+  onReportRobotPosition: () => void;
 }
 
 const Controller: React.FunctionComponent<IControllerProps> = ({
   onChangeMovementToLeft,
   onChangeMovementToRight,
   onChangeRobotMovement,
+  onReportRobotPosition,
 }): JSX.Element => (
-  <div className="direction-section _spacer-md">
+  <div className="direction-section">
     <h4 className="title">Movement and Positions</h4>
     <Button
       className="left-button ui-button-primary"
@@ -34,6 +36,8 @@ const Controller: React.FunctionComponent<IControllerProps> = ({
     >
       MOVE
     </Button>
+
+    <Button onClick={onReportRobotPosition}>REPORT</Button>
   </div>
 );
 

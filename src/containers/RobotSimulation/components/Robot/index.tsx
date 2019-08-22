@@ -8,18 +8,18 @@ const Robot: React.FunctionComponent<IRobotProps> = ({
   isPosition,
 }): JSX.Element => {
   useEffect(() => {
-    const robot = document.getElementById('robot');
+    const { style } = document.getElementById('robot');
     if (!isPosition) {
-      robot.style.display = 'none';
+      style.display = 'none';
       return;
     }
-    const xAxisCalculation = xAxisPlacement * 140 + 70;
-    const yAxisCalculation = -yAxisPlacement * 143 + 623;
+    const xAxisCalculation = xAxisPlacement * 96 + 470;
+    const yAxisCalculation = -yAxisPlacement * 105 + 430;
 
     const robotMovementCoordinates = `translate(${xAxisCalculation}px,${yAxisCalculation}px) rotate(${robotDirection}deg)`;
 
-    robot.style.display = 'block';
-    robot.style.transform = robotMovementCoordinates;
+    style.display = 'block';
+    style.transform = robotMovementCoordinates;
   }, [xAxisPlacement, yAxisPlacement, robotDirection, isPosition]);
 
   return <section className="robot-section" id="robot" />;

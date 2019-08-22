@@ -10,9 +10,11 @@ describe('LETS TEST CONTROLLER Component', () => {
   const onChangeMovementToRight = sinon.spy();
   const onChangeMovementToLeft = sinon.spy();
   const onChangeRobotMovement = sinon.spy();
+  const onReportRobotPosition = sinon.spy();
 
   const ControllerWrapper = shallow(
     <Controller
+      onReportRobotPosition={onReportRobotPosition}
       onChangeMovementToRight={onChangeMovementToRight}
       onChangeMovementToLeft={onChangeMovementToLeft}
       onChangeRobotMovement={onChangeRobotMovement}

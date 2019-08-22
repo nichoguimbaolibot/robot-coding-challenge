@@ -8,12 +8,12 @@ import {
   isCardinalPositionSouth,
   isCardinalPositionWest,
 } from 'utils/validatePosition';
+import { NORTH, EAST, SOUTH, WEST } from 'constant/cardinalDirection';
 import { generateUniqueId } from 'utils/generateUniqueId';
-import Controller from './components/Controller';
+import Controls from './components/Controls';
 import RobotPlacement from './components/RobotPlacement';
 import Robot from './components/Robot';
 import Table from './components/Table';
-import Logs from './components/Logs';
 
 import { MAXIMUM_ROW_BOXES } from 'constant/app';
 
@@ -21,13 +21,18 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
   const [robotXAxisPlacement, setRobotXAxisPlacement] = useState(0);
   const [robotYAxisPlacement, setRobotYAxisPlacement] = useState(0);
   const [robotDirection, setRobotDirection] = useState(0);
-  const [recordedMovements, setRecordedMovements] = useState([]);
+  const [report, setReport] = useState({
+    robotDirection: 0,
+    id: generateUniqueId(),
+    robotXAxisPlacement: 0,
+    robotYAxisPlacement: 0,
+  });
   const [isPosition, setPosition] = useState(false);
 
   const handleRobotPlacement = (
     xAxis: number,
     yAxis: number,
-    f: number,
+    cardinalDirection: number,
   ): boolean => {
     const isInvalidPosition = xAxis < 0 || xAxis > 4 || yAxis < 0 || yAxis > 4;
     if (isInvalidPosition) {
@@ -36,9 +41,10 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
     } else {
       robotPlacementSounds();
       setPosition(true);
-      setRobotDirection(f);
+      setRobotDirection(cardinalDirection);
       setRobotXAxisPlacement(xAxis);
       setRobotYAxisPlacement(yAxis);
+      handleUpdateRecordedMovements(cardinalDirection, yAxis, xAxis);
     }
 
     return true;
@@ -81,12 +87,11 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       setRobotXAxisPlacement(xAxisPlacement);
       setRobotYAxisPlacement(yAxisPlacement);
     }
-
+    console.log('yAxisPlacement', yAxisPlacement);
     handleUpdateRecordedMovements(
       currentDirection,
       yAxisPlacement,
       xAxisPlacement,
-      '',
     );
     return true;
   };
@@ -113,23 +118,32 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
     return true;
   };
 
+  const validateDirection = (position: number) => {
+    if (isCardinalPositionNorth(position)) {
+      return NORTH;
+    } else if (isCardinalPositionEast(position)) {
+      return EAST;
+    } else if (isCardinalPositionSouth(position)) {
+      return SOUTH;
+    } else if (isCardinalPositionWest(position)) {
+      return WEST;
+    }
+
+    return 'INVALID FACE POSITION';
+  };
+
   const handleUpdateRecordedMovements = (
     currentDirection: number,
     yAxis: number,
     xAxis: number,
-    message: string,
   ): void => {
-    const newRecordedMovements = recordedMovements;
-    const newMovement = {
+    const currentReport = {
       robotDirection: currentDirection,
       id: generateUniqueId(),
       robotXAxisPlacement: xAxis,
       robotYAxisPlacement: yAxis,
-      time: new Date(),
-      type: message,
     };
-    newRecordedMovements.push(newMovement);
-    setRecordedMovements(newRecordedMovements);
+    setReport(currentReport);
   };
 
   const handleShowNotificationMessage = (message: string): void => {
@@ -139,7 +153,23 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       description: message,
     });
     errorNoSound();
-    handleUpdateRecordedMovements(null, null, null, message);
+    handleUpdateRecordedMovements(0, 0, 0);
+  };
+
+  const handleReportRobotPosition = (): boolean => {
+    if (!isPosition) {
+      handleShowNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      return false;
+    }
+    const message = `X-Axis: ${report.robotXAxisPlacement} Y:Axis: ${
+      report.robotYAxisPlacement
+    } Cardinal Direction: ${validateDirection(report.robotDirection)}`;
+    Notification.success({
+      placement: 'bottomRight',
+      message: 'Report Position',
+      description: message,
+    });
+    return true;
   };
 
   const robotRotateSound = (): void => {
@@ -172,34 +202,24 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
 
   return (
     <div className="robot-simulation-section">
-      <div className="items">
-        <div className="item">
-          <div className="commands">
-            <RobotPlacement onRobotPlacement={handleRobotPlacement} />
+      <div className="table-container">
+        <Table rowBoxes={MAXIMUM_ROW_BOXES} />
 
-            <Controller
-              onChangeRobotMovement={handleRobotMovement}
-              onChangeMovementToLeft={handleChangeMovementToLeft}
-              onChangeMovementToRight={handleChangeMovementToRight}
-            />
-          </div>
-          <div className="table-container">
-            <Table rowBoxes={MAXIMUM_ROW_BOXES} />
-
-            <Robot
-              xAxisPlacement={robotXAxisPlacement}
-              yAxisPlacement={robotYAxisPlacement}
-              robotDirection={robotDirection}
-              isPosition={isPosition}
-            />
-          </div>
-        </div>
-        <div className="item">
-          <Logs
-            recordedMovements={recordedMovements}
-            onRobotPlacement={handleRobotPlacement}
-          />
-        </div>
+        <Robot
+          xAxisPlacement={robotXAxisPlacement}
+          yAxisPlacement={robotYAxisPlacement}
+          robotDirection={robotDirection}
+          isPosition={isPosition}
+        />
+      </div>
+      <div className="commands">
+        <Controls
+          onReportRobotPosition={handleReportRobotPosition}
+          onChangeRobotMovement={handleRobotMovement}
+          onChangeMovementToLeft={handleChangeMovementToLeft}
+          onChangeMovementToRight={handleChangeMovementToRight}
+        />
+        <RobotPlacement onRobotPlacement={handleRobotPlacement} />
       </div>
     </div>
   );
