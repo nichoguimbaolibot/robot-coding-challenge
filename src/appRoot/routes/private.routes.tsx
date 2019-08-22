@@ -20,16 +20,15 @@ const PrivateRoutes: React.FunctionComponent<IComponentRoutes> = ({
   const [privateRoutes, setRootPath] = useState(privateRoutesList);
   useEffect(() => {
     if (isLoggedIn) {
-      const newPath = [
-        ...privateRoutesList,
-        {
-          component: RobotSimulation,
-          exact: true,
-          id: 'home-id',
-          path: '/',
-        },
-      ];
-      setRootPath(newPath);
+      const newPaths = privateRoutesList;
+      const newPath = {
+        component: RobotSimulation,
+        exact: true,
+        id: 'robot-simulation-id',
+        path: '/',
+      };
+      newPaths.push(newPath);
+      setRootPath(newPaths);
     }
   }, [isLoggedIn]);
 

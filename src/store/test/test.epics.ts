@@ -18,12 +18,13 @@ import {
 export const getTestDataEpic = (action$: any) =>
   action$.pipe(
     ofType(TYPES.GET_TEST_DATA_EPIC),
-    switchMap(() =>
-      ajax('https://jsonplaceholder.typicode.com/users').pipe(
-        map(result => getTestDataSuccess(result.response)),
-        takeUntil(action$.pipe(ofType(TYPES.GET_TEST_DATA_CANCEL))),
-        catchError(error => of(getTestDataError(error))),
-        startWith(getTestDataLoading('1')),
-      ),
+    switchMap(
+      async () =>
+        await ajax('https://jsonplaceholder.typicode.com/users').pipe(
+          map(result => getTestDataSuccess(result.response)),
+          takeUntil(action$.pipe(ofType(TYPES.GET_TEST_DATA_CANCEL))),
+          catchError(error => of(getTestDataError(error))),
+          startWith(getTestDataLoading('1')),
+        ),
     ),
   );

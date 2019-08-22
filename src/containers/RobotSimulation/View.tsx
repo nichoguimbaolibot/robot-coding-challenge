@@ -78,9 +78,6 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       setRobotYAxisPlacement(yAxisPlacement);
     }
 
-    console.log('xAxisPlacement', xAxisPlacement);
-    console.log('yAxisPlacement', yAxisPlacement);
-
     handleUpdateRecordedMovements(
       currentDirection,
       yAxisPlacement,
