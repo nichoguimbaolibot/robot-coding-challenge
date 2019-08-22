@@ -1,0 +1,28 @@
+.robot-simulation-section {
+  @import './logs';
+
+  .items {
+    display: flex;
+    padding: 20px;
+  }
+
+  .items .item {
+    width: 40%;
+
+    &:first-child {
+      width: 60%;
+      margin-right: 50px;
+    }
+  }
+
+  .items .item .commands {
+    text-align: center;
+  }
+
+  .table-container {
+    position: relative;
+    width: 100%;
+  }
+
+  @import './media-query';
+}

@@ -1,0 +1,12 @@
+@media (max-width: 992px) {
+  .items {
+    display: block;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .items .item {
+    width: 100% !important;
+    margin-bottom: 50px;
+  }
+}

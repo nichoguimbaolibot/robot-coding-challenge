@@ -1,0 +1,99 @@
+.logs-section {
+  position: relative;
+  .logs-container {
+    padding: 20px 10px;
+    background: $secondaryLighter;
+  }
+
+  .logs-container .logs-wrapper,
+  .empty-slate {
+    min-height: 700px;
+    max-height: 700px;
+  }
+
+  .logs-container .logs-wrapper {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-bottom: 20px;
+  }
+
+  .empty-slate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logs-wrapper .log-content {
+    margin-bottom: 10px;
+  }
+
+  .logs-wrapper .log-content .time {
+    margin-right: 20px;
+    color: $primaryLighter;
+    font-size: 10px;
+  }
+
+  .logs-wrapper .log-content .message {
+    color: $primaryDarker;
+    font-size: 12px;
+  }
+
+  .log-content .message span {
+    margin-right: 10px;
+    font-weight: 700;
+  }
+
+  .log-content .message .intro {
+    margin-right: 10px;
+  }
+
+  .log-content .message .x-axis-position {
+    color: $beta;
+  }
+
+  .log-content .message .y-axis-position {
+    color: $secondary;
+  }
+
+  .log-content .message .robot-direction {
+    color: $alpha;
+  }
+
+  .logs-container .input-container {
+    position: relative;
+    width: 90%;
+  }
+
+  .logs-container .input-container .ui-input {
+    background: $white;
+    padding: 10px 30px;
+    border-radius: 4px;
+    border: 1px solid $secondaryDark;
+    width: 93%;
+
+    &:hover,
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .logs-container .input-container .sign {
+    position: absolute;
+    top: 6px;
+    left: 10px;
+  }
+
+  .logs-container .input-container .enter {
+    position: absolute;
+    right: 10px;
+    background: transparent;
+    border: 0px;
+    top: 10px;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

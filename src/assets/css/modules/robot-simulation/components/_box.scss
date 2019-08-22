@@ -1,0 +1,13 @@
+.box-container {
+  display: flex;
+  width: 100%;
+
+  .box {
+    width: 120px;
+    height: 120px;
+    text-align: center;
+    margin: 10px;
+    background-color: $secondaryLight;
+    border-radius: 4px;
+  }
+}
