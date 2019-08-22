@@ -15,12 +15,13 @@ const privateRoutesList = [
 ];
 
 const PrivateRoutes: React.FunctionComponent<IComponentRoutes> = ({
-  isLoggedIn,
+  isLoggedIn = true,
 }) => {
-  const [privateRoutes, setRootPath] = useState(privateRoutesList);
+  const [privateRoutes, setRootPath] = useState(new Array());
   useEffect(() => {
+    console.log('isLoggedIn', isLoggedIn);
     if (isLoggedIn) {
-      const newPaths = privateRoutesList;
+      let newPaths = privateRoutesList;
       const newPath = {
         component: RobotSimulation,
         exact: true,
@@ -28,9 +29,12 @@ const PrivateRoutes: React.FunctionComponent<IComponentRoutes> = ({
         path: '/',
       };
       newPaths.push(newPath);
+      console.log('newPaths', newPaths);
       setRootPath(newPaths);
     }
   }, [isLoggedIn]);
+
+  console.log('privateRoutes', privateRoutes);
 
   return (
     <>
@@ -45,7 +49,7 @@ const PrivateRoutes: React.FunctionComponent<IComponentRoutes> = ({
             />
           ))}
 
-          {isLoggedIn && <Route component={() => <h2>404 private</h2>} />}
+          {!isLoggedIn && <Route component={() => <h2>404 private</h2>} />}
         </Switch>
       </Suspense>
     </>

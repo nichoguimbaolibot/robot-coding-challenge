@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
+import { Howl } from 'howler';
 import Notification from 'antd/lib/notification';
 import MESSAGES from 'constant/message';
 import {
@@ -33,6 +34,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       handleShowNotificationMessage(MESSAGES.INVALID_POSITION);
       return false;
     } else {
+      robotPlacementSounds();
       setPosition(true);
       setRobotDirection(f);
       setRobotXAxisPlacement(xAxis);
@@ -74,6 +76,8 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       handleShowNotificationMessage(MESSAGES.MOVEMENT_NOT_ALLOWED);
       return false;
     } else {
+      robotMovementSound();
+
       setRobotXAxisPlacement(xAxisPlacement);
       setRobotYAxisPlacement(yAxisPlacement);
     }
@@ -93,6 +97,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       return false;
     }
     const nextDirection = robotDirection - 90;
+    robotRotateSound();
     setRobotDirection(nextDirection);
     return true;
   };
@@ -103,6 +108,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       return false;
     }
     const nextDirection = robotDirection + 90;
+    robotRotateSound();
     setRobotDirection(nextDirection);
     return true;
   };
@@ -132,7 +138,36 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       message: 'Err...',
       description: message,
     });
+    errorNoSound();
     handleUpdateRecordedMovements(null, null, null, message);
+  };
+
+  const robotRotateSound = (): void => {
+    const robotRotateSound = new Howl({
+      src: ['/robot-rotate.mp3'],
+    });
+    robotRotateSound.play();
+  };
+
+  const robotMovementSound = (): void => {
+    const robotMovementSound = new Howl({
+      src: ['/robot-moving.mp3'],
+    });
+    robotMovementSound.play();
+  };
+
+  const errorNoSound = (): void => {
+    const errorNoSound = new Howl({
+      src: ['/error-no.mp3'],
+    });
+    errorNoSound.play();
+  };
+
+  const robotPlacementSounds = (): void => {
+    const robotPlacementSound = new Howl({
+      src: ['/robot-placement.mp3'],
+    });
+    robotPlacementSound.play();
   };
 
   return (

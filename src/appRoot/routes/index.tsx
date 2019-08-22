@@ -13,6 +13,7 @@ const Routes: React.FunctionComponent<IBaseRoutes> = ({
 
   useEffect(() => {
     if (isLoggedIn) {
+      // @ts-ignore
       const privateLazy = lazy(() => import('./private.routes'));
       setRoutes(privateLazy);
     }

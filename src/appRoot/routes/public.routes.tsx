@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, lazy, useState, useEffect } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Loading from 'components/Loading/Loading';
 import { IComponentRoutes } from './interface';
@@ -20,7 +20,7 @@ const PublicRoutes: React.FunctionComponent<IComponentRoutes> = ({
   const [publicRoutes, setRootPath] = useState(publicRoutesList);
   useEffect(() => {
     if (!isLoggedIn) {
-      const newPaths = publicRoutes;
+      let newPaths = publicRoutes;
       const newPath = {
         component: Public,
         exact: true,
@@ -33,7 +33,7 @@ const PublicRoutes: React.FunctionComponent<IComponentRoutes> = ({
   }, [isLoggedIn, publicRoutes]);
 
   return (
-    <Fragment>
+    <>
       <Suspense fallback={<Loading />}>
         <Switch>
           {publicRoutes.map((route: any) => (
@@ -48,7 +48,7 @@ const PublicRoutes: React.FunctionComponent<IComponentRoutes> = ({
           {!isLoggedIn && <Route component={() => <h2>404 public</h2>} />}
         </Switch>
       </Suspense>
-    </Fragment>
+    </>
   );
 };
 

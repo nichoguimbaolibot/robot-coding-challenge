@@ -1,8 +1,7 @@
 const MESSAGES = {
-  INVALID_POSITION:
-    'You have chosen an invalid position, please provide a valid position.',
-  MOVEMENT_NOT_ALLOWED: 'The movement you provide is not allowed.',
-  ROBOT_NOT_FOUND: 'Robot not found in the table.',
+  INVALID_POSITION: 'Buddy~ It was an invalid position.',
+  MOVEMENT_NOT_ALLOWED: 'Hey!! I will fall off the table!!',
+  ROBOT_NOT_FOUND: 'Im not in the table broooo~',
 };
 
 export default MESSAGES;

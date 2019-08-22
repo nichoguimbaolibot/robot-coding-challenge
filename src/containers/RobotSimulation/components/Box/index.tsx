@@ -9,7 +9,9 @@ const Box: React.FunctionComponent<IBox> = ({ rowBoxes }): JSX.Element => (
     {Array(rowBoxes)
       .fill(Math.random())
       .map((box: number, index: number) => (
-        <div className="box" key={index} />
+        <div className="box" key={index}>
+          <div className="art" />
+        </div>
       ))}
   </div>
 );

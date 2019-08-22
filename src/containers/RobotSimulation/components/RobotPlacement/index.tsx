@@ -52,7 +52,7 @@ const RobotPlacement: React.FunctionComponent<IRobotPlacement> = ({
 
   return (
     <div className="robot-placement-section">
-      <h4>Place the Robot on table first</h4>
+      <h4>Robot Placement</h4>
 
       <Input
         id="input-xAxis"

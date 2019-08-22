@@ -37,9 +37,9 @@ const Message: React.FunctionComponent<IMessageProps> = ({
     <span className="message">
       <span className="intro"> Robot Movement </span>
 
-      <span className="x-axis-position">X: {robotXAxisPlacement}</span>
+      <span className="x-axis-position">X-Axis: {robotXAxisPlacement}</span>
 
-      <span className="y-axis-position">Y: {robotYAxisPlacement}</span>
+      <span className="y-axis-position">Y-Axis: {robotYAxisPlacement}</span>
 
       <span className="robot-direction">
         DIRECTION: {validateDirection(robotDirection)}
