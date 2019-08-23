@@ -52,11 +52,9 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       showErrorNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
       return;
     }
-
     const currentDirection = robotDirection % 360;
     let xAxisPlacement = robotXAxisPlacement;
     let yAxisPlacement = robotYAxisPlacement;
-
     if (isCardinalDirectionNorth(currentDirection)) {
       yAxisPlacement = yAxisPlacement + 1;
     }

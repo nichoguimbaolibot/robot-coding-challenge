@@ -40,6 +40,22 @@ describe('test ROBOT component', () => {
     expect(getByTestId(testId).style.display).toBe('block');
   });
 
+  it('expect ROBOT to be display NONE', () => {
+    const xAxisPlacement = 0;
+    const yAxisPlacement = 0;
+    const robotDirection = 0;
+    const isPosition = false;
+    const { getByTestId } = render(
+      <Robot
+        xAxisPlacement={xAxisPlacement}
+        yAxisPlacement={yAxisPlacement}
+        robotDirection={robotDirection}
+        isPosition={isPosition}
+      />,
+    );
+    expect(getByTestId(testId).style.display).toBe('none');
+  });
+
   it('expect ROBOT to have RIGHT COMPUTATION', () => {
     const xAxisPlacement = 0;
     const yAxisPlacement = 0;
