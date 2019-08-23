@@ -17,6 +17,7 @@ const Controller: React.FunctionComponent<IControllerProps> = ({
   <div className="direction-section">
     <h4 className="title">Movement and Positions</h4>
     <Button
+      data-testid="button-move-left-test"
       className="left-button ui-button-primary"
       onClick={onChangeMovementToLeft}
     >
@@ -24,6 +25,7 @@ const Controller: React.FunctionComponent<IControllerProps> = ({
     </Button>
 
     <Button
+      data-testid="button-move-right-test"
       className="right-button ui-button-primary"
       onClick={onChangeMovementToRight}
     >
@@ -31,13 +33,16 @@ const Controller: React.FunctionComponent<IControllerProps> = ({
     </Button>
 
     <Button
+      data-testid="button-move-test"
       className="move-button ui-button-alpha"
       onClick={onChangeRobotMovement}
     >
       MOVE
     </Button>
 
-    <Button onClick={onReportRobotPosition}>REPORT</Button>
+    <Button data-testid="button-report-test" onClick={onReportRobotPosition}>
+      REPORT
+    </Button>
   </div>
 );
 

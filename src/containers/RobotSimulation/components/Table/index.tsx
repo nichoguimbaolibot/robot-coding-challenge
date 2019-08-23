@@ -9,11 +9,10 @@ const Table: FunctionComponent<ITable> = ({ rowBoxes }): JSX.Element => {
   return (
     <div className="table-box-section">
       <div className="table-item">
-        <div>
+        <div className="vertical-coordinates">
           <Coordinates rowBoxes={boxes} block />
         </div>
-
-        <div>
+        <div className="box-generator">
           {Array(boxes)
             .fill(Math.random())
             .map((box: number, index: number) => (

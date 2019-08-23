@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { IRobotProps } from './interface';
+import { robotCalculation } from 'constant/robotMovementCalculation';
 
 const Robot: React.FunctionComponent<IRobotProps> = ({
   xAxisPlacement,
@@ -13,8 +14,8 @@ const Robot: React.FunctionComponent<IRobotProps> = ({
       style.display = 'none';
       return;
     }
-    const xAxisCalculation = xAxisPlacement * 96 + 49;
-    const yAxisCalculation = -yAxisPlacement * 103 + 420;
+    const xAxisCalculation = robotCalculation.getXAxisMovement(xAxisPlacement);
+    const yAxisCalculation = robotCalculation.getYAxisMovement(yAxisPlacement);
 
     const robotMovementCoordinates = `translate(${xAxisCalculation}px,${yAxisCalculation}px) rotate(${robotDirection}deg)`;
 
@@ -22,7 +23,9 @@ const Robot: React.FunctionComponent<IRobotProps> = ({
     style.transform = robotMovementCoordinates;
   }, [xAxisPlacement, yAxisPlacement, robotDirection, isPosition]);
 
-  return <section className="robot-section" id="robot" />;
+  return (
+    <section data-testid="robot-test" className="robot-section" id="robot" />
+  );
 };
 
 export default Robot;

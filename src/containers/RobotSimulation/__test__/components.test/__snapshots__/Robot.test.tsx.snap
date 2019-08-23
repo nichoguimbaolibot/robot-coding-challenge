@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test ROBOT component renders ROBOT component 1`] = `
+<DocumentFragment>
+  <section
+    class="robot-section"
+    data-testid="robot-test"
+    id="robot"
+    style="display: none;"
+  />
+</DocumentFragment>
+`;

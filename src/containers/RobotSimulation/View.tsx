@@ -3,10 +3,10 @@ import { Howl } from 'howler';
 import Notification from 'antd/lib/notification';
 import MESSAGES from 'constant/message';
 import {
-  isCardinalPositionNorth,
-  isCardinalPositionEast,
-  isCardinalPositionSouth,
-  isCardinalPositionWest,
+  isCardinalDirectionNorth,
+  isCardinalDirectionEast,
+  isCardinalDirectionSouth,
+  isCardinalDirectionWest,
 } from 'utils/validatePosition';
 import { NORTH, EAST, SOUTH, WEST } from 'constant/cardinalDirection';
 import { generateUniqueId } from 'utils/generateUniqueId';
@@ -15,7 +15,7 @@ import RobotPlacement from './components/RobotPlacement';
 import Robot from './components/Robot';
 import Table from './components/Table';
 
-import { MAXIMUM_ROW_BOXES } from 'constant/app';
+import { MAX_BOXES } from 'constant/app';
 
 const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
   const [robotXAxisPlacement, setRobotXAxisPlacement] = useState(0);
@@ -33,106 +33,97 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
     xAxis: number,
     yAxis: number,
     cardinalDirection: number,
-  ): boolean => {
-    const isInvalidPosition = xAxis < 0 || xAxis > 4 || yAxis < 0 || yAxis > 4;
-    if (isInvalidPosition) {
-      handleShowNotificationMessage(MESSAGES.INVALID_POSITION);
-      return false;
+  ): void => {
+    if (xAxis < 0 || xAxis > 4 || yAxis < 0 || yAxis > 4) {
+      showWarningNotificationMessage(MESSAGES.INVALID_POSITION);
+      return;
     } else {
       robotPlacementSounds();
       setPosition(true);
       setRobotDirection(cardinalDirection);
       setRobotXAxisPlacement(xAxis);
       setRobotYAxisPlacement(yAxis);
-      handleUpdateRecordedMovements(cardinalDirection, yAxis, xAxis);
+      handleUpdateReport(cardinalDirection, yAxis, xAxis);
     }
-
-    return true;
   };
 
-  const handleRobotMovement = (): boolean => {
+  const handleRobotMovement = (): void => {
     if (!isPosition) {
-      handleShowNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
-
-      return false;
+      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      return;
     }
 
     const currentDirection = robotDirection % 360;
     let xAxisPlacement = robotXAxisPlacement;
     let yAxisPlacement = robotYAxisPlacement;
 
-    if (isCardinalPositionNorth(currentDirection)) {
-      yAxisPlacement++;
-    } else if (isCardinalPositionEast(currentDirection)) {
-      xAxisPlacement++;
-    } else if (isCardinalPositionSouth(currentDirection)) {
-      yAxisPlacement--;
-    } else if (isCardinalPositionWest(currentDirection)) {
-      xAxisPlacement--;
+    if (isCardinalDirectionNorth(currentDirection)) {
+      yAxisPlacement = yAxisPlacement + 1;
     }
 
-    console.log('yAxisPlacement', yAxisPlacement);
+    if (isCardinalDirectionEast(currentDirection)) {
+      xAxisPlacement = xAxisPlacement + 1;
+    }
 
-    const isInvalidPosition =
+    if (isCardinalDirectionSouth(currentDirection)) {
+      yAxisPlacement = yAxisPlacement - 1;
+    }
+
+    if (isCardinalDirectionWest(currentDirection)) {
+      xAxisPlacement = xAxisPlacement - 1;
+    }
+
+    if (
       xAxisPlacement < 0 ||
       xAxisPlacement > 4 ||
       yAxisPlacement < 0 ||
-      yAxisPlacement > 4;
-    if (isInvalidPosition) {
-      handleShowNotificationMessage(MESSAGES.MOVEMENT_NOT_ALLOWED);
-      return false;
+      yAxisPlacement > 4
+    ) {
+      showWarningNotificationMessage(MESSAGES.MOVEMENT_NOT_ALLOWED);
+      return;
     } else {
       robotMovementSound();
-
       setRobotXAxisPlacement(xAxisPlacement);
       setRobotYAxisPlacement(yAxisPlacement);
     }
-    console.log('yAxisPlacement', yAxisPlacement);
-    handleUpdateRecordedMovements(
-      currentDirection,
-      yAxisPlacement,
-      xAxisPlacement,
-    );
-    return true;
+    handleUpdateReport(currentDirection, yAxisPlacement, xAxisPlacement);
   };
 
-  const handleChangeMovementToLeft = (): boolean => {
+  const handleChangeMovementToLeft = (): void => {
     if (!isPosition) {
-      handleShowNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
-      return false;
+      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      return;
     }
     const nextDirection = robotDirection - 90;
     robotRotateSound();
     setRobotDirection(nextDirection);
-    return true;
   };
 
-  const handleChangeMovementToRight = (): boolean => {
+  const handleChangeMovementToRight = (): void => {
     if (!isPosition) {
-      handleShowNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
-      return false;
+      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      return;
     }
     const nextDirection = robotDirection + 90;
     robotRotateSound();
     setRobotDirection(nextDirection);
-    return true;
   };
 
-  const validateDirection = (position: number) => {
-    if (isCardinalPositionNorth(position)) {
+  const validateDirection = (position: number): string => {
+    if (isCardinalDirectionNorth(position)) {
       return NORTH;
-    } else if (isCardinalPositionEast(position)) {
+    } else if (isCardinalDirectionEast(position)) {
       return EAST;
-    } else if (isCardinalPositionSouth(position)) {
+    } else if (isCardinalDirectionSouth(position)) {
       return SOUTH;
-    } else if (isCardinalPositionWest(position)) {
+    } else if (isCardinalDirectionWest(position)) {
       return WEST;
     }
 
     return 'INVALID FACE POSITION';
   };
 
-  const handleUpdateRecordedMovements = (
+  const handleUpdateReport = (
     currentDirection: number,
     yAxis: number,
     xAxis: number,
@@ -146,20 +137,20 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
     setReport(currentReport);
   };
 
-  const handleShowNotificationMessage = (message: string): void => {
+  const showWarningNotificationMessage = (message: string): void => {
     Notification.warning({
       placement: 'bottomRight',
       message: 'Err...',
       description: message,
     });
     errorNoSound();
-    handleUpdateRecordedMovements(0, 0, 0);
+    handleUpdateReport(0, 0, 0);
   };
 
-  const handleReportRobotPosition = (): boolean => {
+  const handleReportRobotPosition = (): void => {
     if (!isPosition) {
-      handleShowNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
-      return false;
+      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      return;
     }
     const message = `X-Axis: ${report.robotXAxisPlacement} Y:Axis: ${
       report.robotYAxisPlacement
@@ -169,7 +160,6 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       message: 'Report Position',
       description: message,
     });
-    return true;
   };
 
   const robotRotateSound = (): void => {
@@ -203,7 +193,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
   return (
     <div className="robot-simulation-section">
       <div className="table-container">
-        <Table rowBoxes={MAXIMUM_ROW_BOXES} />
+        <Table rowBoxes={MAX_BOXES} />
 
         <Robot
           xAxisPlacement={robotXAxisPlacement}

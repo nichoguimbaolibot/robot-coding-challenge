@@ -55,6 +55,7 @@ const RobotPlacement: React.FunctionComponent<IRobotPlacement> = ({
       <h4>Robot Placement</h4>
 
       <Input
+        data-testid="x-axis-test"
         id="input-xAxis"
         placeholder="x-axis position"
         className="input-xAxis"
@@ -62,6 +63,7 @@ const RobotPlacement: React.FunctionComponent<IRobotPlacement> = ({
       />
 
       <Input
+        data-testid="y-axis-test"
         id="input-yAxis"
         placeholder="y-axis position"
         className="input-yAxis"
@@ -69,6 +71,7 @@ const RobotPlacement: React.FunctionComponent<IRobotPlacement> = ({
       />
 
       <Select
+        data-testid="direction-test"
         id="select-position"
         className="select-position"
         placeholder="ex. North"
@@ -88,6 +91,7 @@ const RobotPlacement: React.FunctionComponent<IRobotPlacement> = ({
       </Select>
 
       <Button
+        data-testid="place-robot-test"
         className="place-robot-btn"
         type="primary"
         onClick={handlePlaceCommand}

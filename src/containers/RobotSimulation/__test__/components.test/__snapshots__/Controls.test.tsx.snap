@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Controls component renders CONTROLS component 1`] = `
+<DocumentFragment>
+  <div
+    class="direction-section"
+  >
+    <h4
+      class="title"
+    >
+      Movement and Positions
+    </h4>
+    <button
+      class="ant-btn left-button ui-button-primary"
+      data-testid="button-move-left-test"
+      type="button"
+    >
+      <span>
+        LEFT
+      </span>
+    </button>
+    <button
+      class="ant-btn right-button ui-button-primary"
+      data-testid="button-move-right-test"
+      type="button"
+    >
+      <span>
+        RIGHT
+      </span>
+    </button>
+    <button
+      class="ant-btn move-button ui-button-alpha"
+      data-testid="button-move-test"
+      type="button"
+    >
+      <span>
+        MOVE
+      </span>
+    </button>
+    <button
+      class="ant-btn"
+      data-testid="button-report-test"
+      type="button"
+    >
+      <span>
+        REPORT
+      </span>
+    </button>
+  </div>
+</DocumentFragment>
+`;

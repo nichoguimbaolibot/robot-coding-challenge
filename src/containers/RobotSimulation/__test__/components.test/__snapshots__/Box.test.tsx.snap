@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders BOX component 1`] = `
+<DocumentFragment>
+  <div
+    class="box-container"
+    data-testid="box-container-test"
+  >
+    <div
+      class="box"
+      data-testid="box-test"
+    />
+    <div
+      class="box"
+      data-testid="box-test"
+    />
+    <div
+      class="box"
+      data-testid="box-test"
+    />
+    <div
+      class="box"
+      data-testid="box-test"
+    />
+    <div
+      class="box"
+      data-testid="box-test"
+    />
+  </div>
+</DocumentFragment>
+`;

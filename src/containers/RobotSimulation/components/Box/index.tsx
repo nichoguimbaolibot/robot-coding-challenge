@@ -5,11 +5,11 @@ interface IBox {
 }
 
 const Box: React.FunctionComponent<IBox> = ({ rowBoxes }): JSX.Element => (
-  <div className="box-container">
+  <div data-testid="box-container-test" className="box-container">
     {Array(rowBoxes)
       .fill(Math.random())
       .map((item: number, index: number) => (
-        <div className="box" key={index} />
+        <div data-testid="box-test" className="box" key={index} />
       ))}
   </div>
 );

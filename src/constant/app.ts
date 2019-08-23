@@ -1,1 +1,1 @@
-export const MAXIMUM_ROW_BOXES = 5;
+export const MAX_BOXES = 5;
