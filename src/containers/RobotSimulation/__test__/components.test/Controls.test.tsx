@@ -25,7 +25,7 @@ describe('test Controls component', () => {
   });
 
   it('expect MOVE TO RIGHT event', () => {
-    const testId = 'button-move-right-test';
+    const TEST_ID = 'button-move-right-test';
     const { getByTestId } = render(
       <Controls
         onChangeMovementToLeft={handleChangeMovementToLeft}
@@ -34,11 +34,11 @@ describe('test Controls component', () => {
         onReportRobotPosition={handleReportRobotPosition}
       />,
     );
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByTestId(TEST_ID));
   });
 
   it('expect ROBOT MOVEMENT event', () => {
-    const testId = 'button-move-test';
+    const TEST_ID = 'button-move-test';
     const { getByTestId } = render(
       <Controls
         onChangeMovementToLeft={handleChangeMovementToLeft}
@@ -47,11 +47,11 @@ describe('test Controls component', () => {
         onReportRobotPosition={handleReportRobotPosition}
       />,
     );
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByTestId(TEST_ID));
   });
 
   it('expect MOVE TO LEFT event', () => {
-    const testId = 'button-move-left-test';
+    const TEST_ID = 'button-move-left-test';
     const { getByTestId } = render(
       <Controls
         onChangeMovementToLeft={handleChangeMovementToLeft}
@@ -60,11 +60,11 @@ describe('test Controls component', () => {
         onReportRobotPosition={handleReportRobotPosition}
       />,
     );
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByTestId(TEST_ID));
   });
 
   it('expect REPORT event', () => {
-    const testId = 'button-report-test';
+    const TEST_ID = 'button-report-test';
     const { getByTestId } = render(
       <Controls
         onChangeMovementToLeft={handleChangeMovementToLeft}
@@ -73,6 +73,6 @@ describe('test Controls component', () => {
         onReportRobotPosition={handleReportRobotPosition}
       />,
     );
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByTestId(TEST_ID));
   });
 });

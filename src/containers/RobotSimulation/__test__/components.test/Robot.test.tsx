@@ -7,7 +7,7 @@ import { robotCalculation } from 'constant/robotMovementCalculation';
 afterEach(cleanup);
 
 describe('test ROBOT component', () => {
-  const testId = 'robot-test';
+  const TEST_ID = 'robot-test';
   it('renders ROBOT component', () => {
     const xAxisPlacement = 0;
     const yAxisPlacement = 0;
@@ -37,7 +37,7 @@ describe('test ROBOT component', () => {
         isPosition={isPosition}
       />,
     );
-    expect(getByTestId(testId).style.display).toBe('block');
+    expect(getByTestId(TEST_ID).style.display).toBe('block');
   });
 
   it('expect ROBOT to be display NONE', () => {
@@ -53,7 +53,7 @@ describe('test ROBOT component', () => {
         isPosition={isPosition}
       />,
     );
-    expect(getByTestId(testId).style.display).toBe('none');
+    expect(getByTestId(TEST_ID).style.display).toBe('none');
   });
 
   it('expect ROBOT to have RIGHT COMPUTATION', () => {
@@ -74,6 +74,6 @@ describe('test ROBOT component', () => {
 
     const robotMovementCoordinates = `translate(${xAxisCalculation}px,${yAxisCalculation}px) rotate(${robotDirection}deg)`;
 
-    expect(getByTestId(testId).style.transform).toBe(robotMovementCoordinates);
+    expect(getByTestId(TEST_ID).style.transform).toBe(robotMovementCoordinates);
   });
 });

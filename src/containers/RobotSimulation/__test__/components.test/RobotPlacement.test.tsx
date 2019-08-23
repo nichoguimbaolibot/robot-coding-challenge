@@ -17,38 +17,38 @@ describe('test ROBOTPLACEMENT component', () => {
   });
 
   it('must have onChangeEvent for x-axis position', () => {
-    const testId = 'x-axis-test';
+    const TEST_ID = 'x-axis-test';
     const { getByTestId } = render(
       <RobotPlacement onRobotPlacement={handleRobotPlacement} />,
     );
 
-    fireEvent.change(getByTestId(testId));
+    fireEvent.change(getByTestId(TEST_ID));
   });
 
   it('must have onChangeEvent for robot cardinal direction', () => {
-    const testId = 'direction-test';
+    const TEST_ID = 'direction-test';
     const { getByTestId } = render(
       <RobotPlacement onRobotPlacement={handleRobotPlacement} />,
     );
 
-    fireEvent.change(getByTestId(testId));
+    fireEvent.change(getByTestId(TEST_ID));
   });
 
   it('must have onChangeEvent for y-axis position', () => {
-    const testId = 'y-axis-test';
+    const TEST_ID = 'y-axis-test';
     const { getByTestId } = render(
       <RobotPlacement onRobotPlacement={handleRobotPlacement} />,
     );
 
-    fireEvent.change(getByTestId(testId));
+    fireEvent.change(getByTestId(TEST_ID));
   });
 
   it('must have onClickEvent for ROBOTPLACEMENT position', () => {
-    const testId = 'place-robot-test';
+    const TEST_ID = 'place-robot-test';
     const { getByTestId } = render(
       <RobotPlacement onRobotPlacement={handleRobotPlacement} />,
     );
 
-    fireEvent.click(getByTestId(testId));
+    fireEvent.click(getByTestId(TEST_ID));
   });
 });
