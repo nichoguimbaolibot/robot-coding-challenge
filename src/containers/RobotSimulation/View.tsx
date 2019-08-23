@@ -118,7 +118,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       return WEST;
     }
 
-    return 'INVALID FACE POSITION';
+    return 'INVALID CARDINAL DIRECTION';
   };
 
   const handleUpdateReport = (
