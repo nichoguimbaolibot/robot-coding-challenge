@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import Router from './controller';
+import Router from './routes';
 import Layout from 'components/Layout/Layout';
 
 const App: FunctionComponent<{}> = (): JSX.Element => {

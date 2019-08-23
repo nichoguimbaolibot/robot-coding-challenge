@@ -35,7 +35,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
     cardinalDirection: number,
   ): void => {
     if (xAxis < 0 || xAxis > 4 || yAxis < 0 || yAxis > 4) {
-      showWarningNotificationMessage(MESSAGES.INVALID_POSITION);
+      showErrorNotificationMessage(MESSAGES.INVALID_POSITION);
       return;
     } else {
       robotPlacementSounds();
@@ -49,7 +49,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
 
   const handleRobotMovement = (): void => {
     if (!isPosition) {
-      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      showErrorNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
       return;
     }
 
@@ -79,19 +79,19 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
       yAxisPlacement < 0 ||
       yAxisPlacement > 4
     ) {
-      showWarningNotificationMessage(MESSAGES.MOVEMENT_NOT_ALLOWED);
+      showErrorNotificationMessage(MESSAGES.MOVEMENT_NOT_ALLOWED);
       return;
     } else {
       robotMovementSound();
       setRobotXAxisPlacement(xAxisPlacement);
       setRobotYAxisPlacement(yAxisPlacement);
+      handleUpdateReport(currentDirection, yAxisPlacement, xAxisPlacement);
     }
-    handleUpdateReport(currentDirection, yAxisPlacement, xAxisPlacement);
   };
 
   const handleChangeMovementToLeft = (): void => {
     if (!isPosition) {
-      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      showErrorNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
       return;
     }
     const nextDirection = robotDirection - 90;
@@ -101,7 +101,7 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
 
   const handleChangeMovementToRight = (): void => {
     if (!isPosition) {
-      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      showErrorNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
       return;
     }
     const nextDirection = robotDirection + 90;
@@ -137,19 +137,22 @@ const RobotCodingChallenge: FunctionComponent = (): JSX.Element => {
     setReport(currentReport);
   };
 
-  const showWarningNotificationMessage = (message: string): void => {
-    Notification.warning({
+  const showErrorNotificationMessage = (message: string): void => {
+    Notification.error({
       placement: 'bottomRight',
       message: 'Err...',
       description: message,
     });
     errorNoSound();
-    handleUpdateReport(0, 0, 0);
   };
 
   const handleReportRobotPosition = (): void => {
     if (!isPosition) {
-      showWarningNotificationMessage(MESSAGES.ROBOT_NOT_FOUND);
+      Notification.success({
+        placement: 'bottomRight',
+        message: 'Report Position',
+        description: MESSAGES.ROBOT_NOT_FOUND,
+      });
       return;
     }
     const message = `X-Axis: ${report.robotXAxisPlacement} Y:Axis: ${
